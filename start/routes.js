@@ -8,12 +8,13 @@ Route.post('sessions', 'SessionController.store')
 // Session
 Route.post('passwords', 'ForgotPasswordController.store')
 Route.put('passwords', 'ForgotPasswordController.update')
+// File Show
+Route.get('file/:id', 'FileController.show')
 // Auth
 Route.group(() => {
   // File Create
   Route.post('file', 'FileController.store')
   // Project
   Route.resource('projects', 'ProjectController').apiOnly()
+  Route.resource('projects.tasks', 'TaskController').apiOnly()
 }).middleware(['auth'])
-// File Show
-Route.get('file/:id', 'FileController.show')

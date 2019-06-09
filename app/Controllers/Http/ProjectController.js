@@ -19,7 +19,7 @@ class ProjectController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index({ request, response, view }) {
+  async index() {
     const projects = await Project.query()
       .with('user')
       .fetch()
@@ -35,7 +35,7 @@ class ProjectController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response, auth }) {
+  async store({ request, auth }) {
     const data = request.only(['title', 'description'])
 
     const project = Project.create({ ...data, user_id: auth.user.id })
@@ -52,7 +52,7 @@ class ProjectController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show({ params, request, response, view }) {
+  async show({ params }) {
     const project = await Project.findOrFail(params.id)
 
     await project.load('user')
@@ -69,7 +69,7 @@ class ProjectController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request, response }) {
+  async update({ params, request }) {
     const project = await Project.findOrFail(params.id)
     const data = request.only(['title', 'description'])
 
@@ -87,7 +87,7 @@ class ProjectController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {
+  async destroy({ params }) {
     const project = await Project.findOrFail(params.id)
     await project.delete()
   }
