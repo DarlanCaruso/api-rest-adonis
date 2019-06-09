@@ -5,5 +5,9 @@ const Route = use('Route')
 
 Route.post('users', 'UserController.store')
 Route.post('sessions', 'SessionController.store')
+
 Route.post('passwords', 'ForgotPasswordController.store')
 Route.put('passwords', 'ForgotPasswordController.update')
+
+Route.post('file', 'FileController.store')
+Route.get('file/:id', 'FileController.show')
